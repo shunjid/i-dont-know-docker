@@ -18,19 +18,6 @@ CORS(app=app)
 with app.app_context():
     db.create_all()
 
-    db.session.add(
-        User(
-            first_name="Test",
-            last_name="Doe",
-            email_address="test@example.com",
-            mobile_number="+8801172211111",
-        )
-    )
-
-    # uncomment on startup
-    # if sqlite database is not there
-    # db.session.commit()
-
 
 @app.route("/api/users", methods=["GET"])
 def index():
