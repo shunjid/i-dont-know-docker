@@ -1,21 +1,19 @@
-class User:
-    def __init__(self, first_name, last_name, email_address, mobile_number):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email_address = email_address
-        self.mobile_number = mobile_number
-        pass
+from services.database import db
+from datetime import datetime
 
-    def __repr__(self):
-        return f"""
-        Name: {self.first_name} {self.last_name},
-        Email: {self.email_address} 
-        and Mobile Number: {self.mobile_number}
-        """
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    email_address = db.Column(db.String(100), nullable=False, unique=True)
+    mobile_number = db.Column(db.String(20), nullable=False, unique=True)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
         return {
-            "name": f"{self.first_name} {self.last_name}",
+            "firstName": self.first_name,
+            "lastName": self.last_name,
             "email": self.email_address,
             "mobile": self.mobile_number,
         }
