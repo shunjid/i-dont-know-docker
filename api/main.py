@@ -5,12 +5,12 @@ from models.user import User
 
 # initiate flask app
 app = Flask(__name__)
-# config
+
+# configure database
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-# add database
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///usersdb.sqlite"
-# initialize database
 db.init_app(app)
+
 # enable cors
 CORS(app=app)
 
