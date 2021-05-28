@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
+from constants.common import CONFIGURATION
 from services.database import db
 from routes.users import users
 
 # configuration
 app = Flask(__name__)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///usersdb.sqlite"
+app.config[CONFIGURATION["track"]] = False
+app.config[CONFIGURATION["uri"]] = CONFIGURATION["sqlite"]
 db.init_app(app)
 
 # enable cors
@@ -20,4 +21,4 @@ with app.app_context():
 app.register_blueprint(users)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host=CONFIGURATION["host"])
