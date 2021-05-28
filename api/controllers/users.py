@@ -1,12 +1,17 @@
+# installed libraries
 from flask import Blueprint, request
 from marshmallow import ValidationError
-from models.user import User
-from utils.response import success, error, success_dict
-from schema.user import UserSchema
-from services.user_queries import findAll, findOne, findByEmail, findByMobile
-from services.commands import create_one
-from constants.messages import ERRORS
 
+# custom libraries
+from constants.messages import ERRORS
+from schema.user import UserSchema
+from services.queries.user import findAll, findOne, findByEmail, findByMobile
+from services.commands import create_one
+from services.instance import create_user_instance
+from utils.response import success, error, success_dict
+
+
+# global variables
 users = Blueprint("users", __name__)
 user_schema = UserSchema()
 
@@ -43,15 +48,8 @@ def create_user():
     body = request.get_json()
 
     try:
-        # model validation
-        schema = user_schema.load(body)
-
-        new_user = User(
-            first_name=schema["firstName"],
-            last_name=schema["lastName"],
-            email_address=schema["emailAddress"],
-            mobile_number=schema["mobileNumber"],
-        )
+        validated_user: dict = user_schema.load(body)
+        new_user = create_user_instance(validated_user)
 
         if findByEmail(new_user.email_address):
             return error(
@@ -67,7 +65,7 @@ def create_user():
             create_one(new_user)
 
             return success_dict(
-                data=schema,
+                data=validated_user,
             )
     except ValidationError as err:
         return error(
