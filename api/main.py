@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from constants.common import CONFIGURATION
 from services.database import db
-from controllers.users import users
+from controllers.users import users_bp
 
 # configuration
 app = Flask(__name__)
@@ -18,7 +18,7 @@ with app.app_context():
     db.create_all()
 
 # register blueprints
-app.register_blueprint(users)
+app.register_blueprint(users_bp)
 
 if __name__ == "__main__":
     app.run(debug=True, host=CONFIGURATION["host"])
