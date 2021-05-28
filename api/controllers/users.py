@@ -1,6 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from models.user import User
-from utils.response import success, error
+from utils.response import success, error, dict_to_json
+from schema.user import UserSchema
+from marshmallow import ValidationError
 
 users = Blueprint("users", __name__)
 
@@ -25,3 +27,16 @@ def get_user_by_id(id):
             return success(data=user)
     except Exception as e:
         return error(message=str(e), status_code=500)
+
+
+@users.route("/api/users", methods=["POST"])
+def create_user():
+    body = request.get_json()
+    user_schema = UserSchema()
+
+    try:
+        user_validation_result = user_schema.load(body)
+        print(type(user_validation_result))
+        return dict_to_json(data=user_validation_result)
+    except ValidationError as err:
+        return error(message=err.messages, status_code=500)
