@@ -19,7 +19,7 @@ def success(data, single=True):
     return jsonify(response)
 
 
-def error(message="Something went wrong. Please try again.", status_code=400):
+def error(message="Something went wrong. Please try again.", status_code=404):
     """Generate error response for API.
 
     Args:
