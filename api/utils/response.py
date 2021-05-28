@@ -19,7 +19,7 @@ def success(data, single=True):
     return jsonify(response)
 
 
-def error(message="Something went wrong. Please try again.", status_code=400):
+def error(message="Something went wrong. Please try again.", status_code=404):
     """Generate error response for API.
 
     Args:
@@ -32,4 +32,9 @@ def error(message="Something went wrong. Please try again.", status_code=400):
 
     response = jsonify({"status": "failed", "message": message})
     response.status_code = status_code
+    return response
+
+
+def success_dict(data: dict):
+    response = jsonify({"status": "ok", "data": data})
     return response
