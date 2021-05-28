@@ -35,5 +35,6 @@ def error(message="Something went wrong. Please try again.", status_code=404):
     return response
 
 
-def dict_to_json(data):
-    return jsonify(data)
+def success_dict(data: dict):
+    response = jsonify({"status": "ok", "data": data})
+    return response
