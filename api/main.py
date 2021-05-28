@@ -2,12 +2,14 @@ from flask import Flask
 from flask_cors import CORS
 from constants.common import CONFIGURATION
 from services.database import db
+from services.mysql import create_db_if_not_exists
 from controllers.users import users_bp
 
 # configuration
 app = Flask(__name__)
 app.config[CONFIGURATION["track"]] = False
-app.config[CONFIGURATION["uri"]] = CONFIGURATION["sqlite"]
+app.config[CONFIGURATION["uri"]] = CONFIGURATION["mysql"]
+create_db_if_not_exists()
 db.init_app(app)
 
 # enable cors
