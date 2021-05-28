@@ -11,9 +11,11 @@ class User(db.Model):
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
-        return {
+        user_dict = {
             "firstName": self.first_name,
             "lastName": self.last_name,
             "email": self.email_address,
             "mobile": self.mobile_number,
         }
+
+        return user_dict
