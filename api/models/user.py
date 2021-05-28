@@ -12,6 +12,7 @@ class User(db.Model):
 
     def to_dict(self):
         user_dict = {
+            "id": self.id,
             "firstName": self.first_name,
             "lastName": self.last_name,
             "email": self.email_address,

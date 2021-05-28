@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from constants.common import CONFIGURATION
 from services.database import db
-from routes.users import users
+from controllers.users import users
 
 # configuration
 app = Flask(__name__)
