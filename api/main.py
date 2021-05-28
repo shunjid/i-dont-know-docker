@@ -1,14 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
+from constants.common import CONFIGURATION
 from services.database import db
-from models.user import User
+from controllers.users import users
 
-# initiate flask app
+# configuration
 app = Flask(__name__)
-
-# configure database
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///usersdb.sqlite"
+app.config[CONFIGURATION["track"]] = False
+app.config[CONFIGURATION["uri"]] = CONFIGURATION["sqlite"]
 db.init_app(app)
 
 # enable cors
@@ -18,21 +17,8 @@ CORS(app=app)
 with app.app_context():
     db.create_all()
 
-
-@app.route("/api/users", methods=["GET"])
-def index():
-    response = dict()
-    try:
-        all_users = User.query.all()
-
-        response["status"], response["data"] = "ok", [
-            user.to_dict() for user in all_users
-        ]
-    except Exception as e:
-        response["status"], response["message"] = "failed", str(e)
-    finally:
-        return jsonify(response)
-
+# register blueprints
+app.register_blueprint(users)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host=CONFIGURATION["host"])
