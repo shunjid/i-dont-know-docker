@@ -12,11 +12,11 @@ from utils.response import success, error, success_dict
 
 
 # global variables
-users = Blueprint("users", __name__)
+users_bp = Blueprint("users", __name__)
 user_schema = UserSchema()
 
 
-@users.route("/api/users", methods=["GET"])
+@users_bp.route("/api/users", methods=["GET"])
 def get_users():
     try:
         return success(
@@ -30,7 +30,7 @@ def get_users():
         )
 
 
-@users.route("/api/users/<id>", methods=["GET"])
+@users_bp.route("/api/users/<id>", methods=["GET"])
 def get_user_by_id(id):
     try:
         return success(
@@ -43,7 +43,7 @@ def get_user_by_id(id):
         )
 
 
-@users.route("/api/users", methods=["POST"])
+@users_bp.route("/api/users", methods=["POST"])
 def create_user():
     body = request.get_json()
 
