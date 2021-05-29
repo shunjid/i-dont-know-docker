@@ -1,9 +1,14 @@
 <template>
-  <div></div>
+  <div>
+    <add-user-form />
+  </div>
 </template>
 
 <script>
-export default {};
+import AddUserForm from "../components/AddUserForm.vue";
+export default {
+  components: { AddUserForm },
+};
 </script>
 
 <style lang="scss" scoped></style>
