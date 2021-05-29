@@ -5,6 +5,7 @@
         <h2 class="text-center">Contact List</h2>
       </v-col>
     </v-row>
+    <v-skeleton-loader type="table" :loading="isFetching" v-if="isFetching" />
     <v-row>
       <v-col cols="12" class="pa-12">
         <v-data-table
@@ -38,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["users"]),
+    ...mapState(["users", "isFetching"]),
   },
   created() {
     this.$store.dispatch("getUsers");
