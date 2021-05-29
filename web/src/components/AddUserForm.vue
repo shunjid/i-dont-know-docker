@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" class="pa-12">
-      <v-card elevation="4" class="px-12 primaryFont">
+      <v-card elevation="2" class="px-12 primaryFont">
         <v-card-title>Add new contact</v-card-title>
         <v-card-text>
           <v-form ref="userForm" v-model="valid" lazy-validation>
