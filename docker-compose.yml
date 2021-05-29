@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    ports:
+      - 5051:5000
+    volumes:
+      - ./api:/app/api
+    depends_on:
+      - db
+    restart: on-failure:10
+
+  db:
+    image: mysql:8.0.25
+    restart: always
+    environment:
+      MYSQL_DATABASE: users_db
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./api/dbdata:/var/lib/mysql
+    ports:
+      - 33066:3306

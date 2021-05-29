@@ -3,7 +3,7 @@ import mysql.connector
 
 def create_db_if_not_exists():
     mysqldb = mysql.connector.connect(
-        host="localhost", user="newscred", passwd="Mysql123456:P"
+        host="db", user="root", passwd="root"
     )
     mysql_cursor = mysqldb.cursor()
     query = "CREATE DATABASE IF NOT EXISTS users_db"
