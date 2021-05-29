@@ -53,5 +53,27 @@ export default new Vuex.Store({
           context.commit("SET_IS_FETCHING", false);
         });
     },
+    addUser(context, payload) {
+      context.commit("SET_IS_POSTING", true);
+
+      axios
+        .post(`${api}/users`, payload)
+        .then((res) => {
+          context.dispatch("getUsers");
+          console.log(res.data.data);
+        })
+        .catch((error) => {
+          context.commit("SHOW_SNACKBAR", {
+            text: error.response
+              ? error.response.data.message
+              : "Something went wrong",
+            color: "error",
+          });
+          console.log(error);
+        })
+        .finally(() => {
+          context.commit("SET_IS_POSTING", false);
+        });
+    },
   },
 });

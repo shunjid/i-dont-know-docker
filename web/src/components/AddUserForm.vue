@@ -9,7 +9,7 @@
               <v-col cols="12" lg="6">
                 <v-text-field
                   v-model="firstName"
-                  :counter="10"
+                  :counter="20"
                   :rules="nameRules"
                   label="First Name"
                   required
@@ -18,7 +18,7 @@
               <v-col cols="12" lg="6">
                 <v-text-field
                   v-model="lastName"
-                  :counter="10"
+                  :counter="20"
                   :rules="nameRules"
                   label="Last Name"
                   required
@@ -49,6 +49,7 @@
               :disabled="!valid"
               color="secondary"
               class="mr-4"
+              :loading="isPosting"
               @click="submit"
             >
               <v-icon left dark> mdi-check </v-icon>
@@ -62,6 +63,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data: () => ({
     valid: true,
@@ -71,7 +74,7 @@ export default {
     mobileNumber: "",
     nameRules: [
       (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
     ],
     emailRules: [
       (v) => !!v || "E-mail is required",
@@ -84,7 +87,9 @@ export default {
         "Invalid Bangladeshi Mobile Number",
     ],
   }),
-
+  computed: {
+    ...mapState(["isPosting"]),
+  },
   methods: {
     submit() {
       if (this.$refs.userForm.validate()) {
@@ -95,7 +100,9 @@ export default {
           mobileNumber: this.mobileNumber,
         };
 
-        console.log(formData);
+        this.$store.dispatch("addUser", formData).then(() => {
+          this.$refs.userForm.reset();
+        });
       }
     },
   },
