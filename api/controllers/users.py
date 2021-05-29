@@ -13,7 +13,7 @@ from services.queries.user import (
     findByEmailExcludeId,
     findByMobileExcludeId,
 )
-from services.commands import create_one, commit
+from services.commands import commit, create_one, delete_one
 from services.instance import create_user_instance
 from utils.response import success, error, success_dict
 
@@ -127,6 +127,27 @@ def update_user(id):
             message=err.messages,
             status_code=500,
         )
+    except Exception as e:
+        return error(
+            message=str(e),
+            status_code=500,
+        )
+
+
+@users_bp.route("/api/users/<id>", methods=["DELETE"])
+def delete_user(id):
+    try:
+        user = findOne(id)
+
+        if user is None:
+            return error(
+                message=ERRORS["USER_NOT_FOUND"],
+                status_code=404,
+            )
+        else:
+            delete_one(user)
+            return success(data=user)
+
     except Exception as e:
         return error(
             message=str(e),
