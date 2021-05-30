@@ -37,17 +37,12 @@ export default new Vuex.Store({
         .get(`${api}/users`)
         .then((res) => {
           context.commit("SET_USERS", res.data.data);
-          context.commit("SHOW_SNACKBAR", {
-            text: "Contacts fetched successfully",
-            color: "grey darken-4",
-          });
         })
-        .catch((err) => {
+        .catch(() => {
           context.commit("SHOW_SNACKBAR", {
             text: "Something went wrong",
             color: "error",
           });
-          console.log(err);
         })
         .finally(() => {
           context.commit("SET_IS_FETCHING", false);
@@ -58,9 +53,13 @@ export default new Vuex.Store({
 
       axios
         .post(`${api}/users`, payload)
-        .then((res) => {
+        .then(() => {
           context.dispatch("getUsers");
-          console.log(res.data.data);
+
+          context.commit("SHOW_SNACKBAR", {
+            text: "User added successfully",
+            color: "primary",
+          });
         })
         .catch((error) => {
           context.commit("SHOW_SNACKBAR", {
@@ -73,6 +72,34 @@ export default new Vuex.Store({
         })
         .finally(() => {
           context.commit("SET_IS_POSTING", false);
+        });
+    },
+    updateUser(context, payload) {
+      const id = payload.id;
+
+      const body = {
+        emailAddress: payload.email,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        mobileNumber: payload.mobile,
+      };
+
+      axios
+        .put(`${api}/users/${id}`, body)
+        .then(() => {
+          context.commit("SHOW_SNACKBAR", {
+            text: "Contact updated successfully",
+            color: "primary",
+          });
+        })
+        .catch((error) => {
+          context.commit("SHOW_SNACKBAR", {
+            text: error.response
+              ? error.response.data.message
+              : "Something went wrong",
+            color: "error",
+          });
+          context.dispatch("getUsers");
         });
     },
   },
