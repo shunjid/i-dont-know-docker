@@ -1,4 +1,6 @@
-![banner](assets/images/banner.png)
+<p align="center">
+    <img src="assets/images/sticker.png" height="230"/>
+</p>
 
 # :whale: **I-Dont-Know-Docker**
 
