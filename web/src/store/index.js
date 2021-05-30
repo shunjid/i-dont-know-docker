@@ -102,5 +102,22 @@ export default new Vuex.Store({
           context.dispatch("getUsers");
         });
     },
+    deleteUser(context, payload) {
+      axios
+        .delete(`${api}/users/${payload}`)
+        .then(() => {
+          context.commit("SHOW_SNACKBAR", {
+            text: "Contact deleted",
+            color: "grey darken-4",
+          });
+          context.dispatch("getUsers");
+        })
+        .catch(() => {
+          context.commit("SHOW_SNACKBAR", {
+            text: "Contact couldn't be deleted",
+            color: "error",
+          });
+        });
+    },
   },
 });
