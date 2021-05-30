@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   web:
     build:
@@ -10,6 +10,10 @@ services:
       - ./web:/app/web
     depends_on:
       - api
+    restart: on-failure:10
+    healthcheck:
+      test: curl --fail http://localhost:5051/api/users
+      start_period: 2s
 
   api:
     build:
@@ -22,6 +26,9 @@ services:
     depends_on:
       - db
     restart: on-failure:10
+    healthcheck:
+      test: curl --fail http://localhost:33066
+      start_period: 2s
 
   db:
     image: mysql:8.0.25
