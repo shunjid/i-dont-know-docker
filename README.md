@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="assets/images/sticker.png" width="220"/>
-</p>
+<img align="right" src="assets/images/sticker.png" width="250"/>
 
 # **I Don't Know Docker**
 
