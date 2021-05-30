@@ -1,24 +1,9 @@
-# web
+## **Screenshots**
 
-## Project setup
-```
-npm install
-```
+| Add new user                                       | View Users                                          |
+| -------------------------------------------------- | --------------------------------------------------- |
+| <img src="../assets/images/add.png" height="480"/> | <img src="../assets/images/view.png" height="480"/> |
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+| Update inside table                                   | Delete by confirmation                                |
+| ----------------------------------------------------- | ----------------------------------------------------- |
+| <img src="../assets/images/update.png" height="480"/> | <img src="../assets/images/delete.png" height="480"/> |

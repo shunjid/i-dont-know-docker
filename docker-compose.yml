@@ -1,5 +1,16 @@
 version: "3.8"
 services:
+  web:
+    build:
+      context: web
+      dockerfile: Dockerfile
+    ports:
+      - 5050:8080
+    volumes:
+      - ./web:/app/web
+    depends_on:
+      - api
+
   api:
     build:
       context: api
