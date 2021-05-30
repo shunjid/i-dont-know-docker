@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="assets/images/sticker.png" height="260"/>
+    <img src="assets/images/sticker.png"/>
 </p>
 
 # **I Don't Know Docker**
@@ -36,17 +36,23 @@ $ docker-compose up
 > Build starts [....]
 ```
 
-After building successfully, you can test the website by opening [http://localhost:5050/](http://localhost:5050/) on your browser which will route you to the homepage of the Vue.js single page application like the screenshots below 👇.
+After building successfully, you can test the website by opening:
+
+```bash
+http://localhost:5050/
+```
+
+on your browser which will route you to the homepage of the Single Page Application like the screenshots below 👇.
 
 ## **Screenshots**
 
-| Add new user                                    | View Users                                       |
-| ----------------------------------------------- | ------------------------------------------------ |
-| <img src="assets/images/add.png" height="480"/> | <img src="assets/images/view.png" height="480"/> |
+| Add new user                        | View Users                           |
+| ----------------------------------- | ------------------------------------ |
+| <img src="assets/images/add.png" /> | <img src="assets/images/view.png" /> |
 
-| Update inside table                                | Delete by confirmation                             |
-| -------------------------------------------------- | -------------------------------------------------- |
-| <img src="assets/images/update.png" height="480"/> | <img src="assets/images/delete.png" height="480"/> |
+| Update inside table                    | Delete by confirmation                 |
+| -------------------------------------- | -------------------------------------- |
+| <img src="assets/images/update.png" /> | <img src="assets/images/delete.png" /> |
 
 ## Testing APIs
 
