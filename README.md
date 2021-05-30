@@ -1,8 +1,8 @@
 <p align="center">
-    <img src="assets/images/sticker.png" height="230"/>
+    <img src="assets/images/sticker.png" height="260"/>
 </p>
 
-# :whale: **I-Dont-Know-Docker**
+# **I Don't Know Docker**
 
 This project is one of the assignments of my internship @newscred. The main objective of this project is learning by working with docker. In the docker-compose.yml three services have been introduced with the dependency cycle **(Web --> API --> DB)**:
 
