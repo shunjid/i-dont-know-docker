@@ -22,18 +22,18 @@ def findByMobile(mobile):
 
 
 def findByEmailExcludeId(email, user_id):
-    result = User.query.filter_by(email_address=email).first()
+    result = findByEmail(email)
 
-    if result.id == int(user_id):
+    if result is None or result.id == int(user_id):
         return None
     else:
         return result
 
 
 def findByMobileExcludeId(mobile, user_id):
-    result = User.query.filter_by(mobile_number=mobile).first()
+    result = findByMobile(mobile)
 
-    if result.id == int(user_id):
+    if result is None or result.id == int(user_id):
         return None
     else:
         return result

@@ -108,7 +108,7 @@ def update_user(id):
                 message=ERRORS["EMAIL_EXISTS"],
                 status_code=500,
             )
-        elif findByMobileExcludeId(mobile=updated_user.mobile_number, user_id=id):
+        elif findByMobileExcludeId(updated_user.mobile_number, id):
             return error(
                 message=ERRORS["MOBILE_EXISTS"],
                 status_code=500,

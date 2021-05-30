@@ -15,6 +15,8 @@ services:
   db:
     image: mysql:8.0.25
     restart: always
+    cap_add:
+      - SYS_NICE
     environment:
       MYSQL_DATABASE: users_db
       MYSQL_PASSWORD: root
