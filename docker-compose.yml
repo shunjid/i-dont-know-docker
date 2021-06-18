@@ -8,6 +8,7 @@ services:
       - 5050:8080
     volumes:
       - ./web:/app/web
+      - /app/web/node_modules
     depends_on:
       - api
     restart: on-failure:10
@@ -32,7 +33,7 @@ services:
 
   db:
     image: mysql:8.0.25
-    restart: always
+    restart: on-failure:10
     cap_add:
       - SYS_NICE
     environment:
